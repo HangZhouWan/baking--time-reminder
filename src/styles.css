@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+
+*, body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: #fafafa;
+}
+
+html, body {
+  height: 100%;
+}
+
+.mat-card {
+  width: 100%;
+}
+
+.mat-card-header .mat-card-header-text {
+  margin: 0;
+}
