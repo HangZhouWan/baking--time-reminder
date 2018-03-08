@@ -19,6 +19,11 @@
   background-color: white;
 }
 
+.list-container{
+  height: 95%;
+  overflow: auto;
+}
+
 .main {
   width: 80%;
   display: flex;
@@ -33,10 +38,38 @@
   height: auto;
 }
 
-.mat-card-title {
-  color: #f44336;
+mat-card{
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-mat-table {
-  width: 100%;
+.mat-card-content.alert, td.alert{
+  color: #f44336;
 }
+td.done {
+  color: #009933;
+}
+
+table {
+  background-color: white;
+}
+
+table th:not(colspan),table td:not(colspan) {
+  width: 11%;
+  text-align: center;
+}
+
+td input.range{
+  width: 35%;
+}
+
+td input.time{
+  width: 20%;
+}
+
+footer{
+  position: absolute;
+  bottom: 0;
+  text-align: center; width: 80%
+}
+

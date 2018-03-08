@@ -8,92 +8,74 @@
 </div>
 <div class="main-container">
   <div class="main">
-    <mat-table #table [dataSource]="dataSource">
-
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
-
-      <!-- Position Column -->
-      <ng-container matColumnDef="position">
-        <mat-header-cell *matHeaderCellDef> 醒发时间</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.position}}</mat-cell>
-      </ng-container>
-
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> 揉</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.name}}</mat-cell>
-      </ng-container>
-
-      <!-- Weight Column -->
-      <ng-container matColumnDef="weight">
-        <mat-header-cell *matHeaderCellDef> 分</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.weight}}</mat-cell>
-      </ng-container>
-
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="symbol">
-        <mat-header-cell *matHeaderCellDef> 缩</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.symbol}}</mat-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
+    <table class="table">
+      <thead>
+      <tr>
+        <th colspan="10">烤面包时间计算公式（填写吸水率、醒发时间)</th>
+      </tr>
+      <tr>
+        <th scope="col">序号</th>
+        <th scope="col">吸水率%</th>
+        <th scope="col">加水量</th>
+        <th scope="col">醒发时间</th>
+        <th scope="col">揉</th>
+        <th scope="col">分</th>
+        <th scope="col">缩</th>
+        <th scope="col">烤</th>
+        <th scope="col">出</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let row of rowData">
+        <td>{{row.index}}</td>
+        <td>
+          <input class="range" [(ngModel)]='row.waterRange' (blur)="calculateWaterValume(row, row.waterRange)">
+        </td>
+        <td>{{row.water}}</td>
+        <td>{{row.proof.displayTime}}</td>
+        <td [ngClass]="{'alert': row.knead.alert, 'done':row.knead.done}">{{row.knead.displayTime}}</td>
+        <td [ngClass]="{'alert': row.split.alert, 'done':row.split.done}">{{row.split.displayTime}}</td>
+        <td [ngClass]="{'alert': row.shrink.alert, 'done':row.shrink.done}">{{row.shrink.displayTime}}</td>
+        <td [ngClass]="{'alert': row.bake.alert, 'done':row.bake.done}">{{row.bake.displayTime}}</td>
+        <td [ngClass]="{'alert': row.baked.alert, 'done':row.baked.done}">{{row.baked.displayTime}}</td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="10">
+          <button (click)="onNewDataButtonClick()" type="button" class="btn btn-primary">添加数据</button>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+    <footer>@CopyRight @Max chang & @Sun Tong. V1.0.0</footer>
   </div>
   <div class="side-reminder">
-    <h3 class="reminder-title">Reminders</h3>
-    <mat-list role="list">
-      <mat-list-item role="listitem">
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>9:17</mat-card-title>
-            <mat-card-subtitle>醒发</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <p>
-              提醒：醒发！
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-raised-button color="primary" mat-button>完成</button>
-          </mat-card-actions>
-        </mat-card>
-      </mat-list-item>
-      <mat-list-item role="listitem">
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>9:17</mat-card-title>
-            <mat-card-subtitle>醒发</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <p>
-              提醒：醒发！
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-raised-button color="primary" mat-button>完成</button>
-          </mat-card-actions>
-        </mat-card>
-      </mat-list-item>
-      <mat-list-item role="listitem">
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>9:17</mat-card-title>
-            <mat-card-subtitle>醒发</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <p>
-              提醒：醒发！
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-raised-button color="primary" mat-button>完成</button>
-          </mat-card-actions>
-        </mat-card>
-      </mat-list-item>
-    </mat-list>
+    <h3 class="reminder-title">待办事项</h3>
+    <div class="list-container">
+      <mat-list role="list">
+        <mat-list-item *ngFor="let row of reminderList"role="listitem">
+          <mat-card *ngIf="!row.done" >
+            <mat-card-header>
+              <mat-card-title>{{row.displayTime}}</mat-card-title>
+              <mat-card-subtitle>{{row.reminder}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content  [ngClass]="{'alert': row.alert}">
+              <p>
+                提醒：第{{row.index}}组需要{{row.reminder}}！
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button type="button" (click)="reminderDone(row)" class="btn btn-primary">完成</button>
+            </mat-card-actions>
+          </mat-card>
+        </mat-list-item>
+      </mat-list>
+    </div>
   </div>
 </div>
+<audio #alertMessage src="../assets/alert/alert.mp3">
+</audio>
 
 

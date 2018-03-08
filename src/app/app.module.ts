@@ -1,5 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
 import {
   MatButtonModule,
   MatIconModule,
@@ -9,7 +11,8 @@ import {
   MatListModule,
   MatCardModule,
   MatTableModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatInputModule
 } from '@angular/material';
 
 
@@ -21,6 +24,7 @@ import {AppComponent} from './app.component';
     AppComponent,
   ],
   imports: [
+    FormsModule,
     MatIconModule,
     MatToolbarModule,
     BrowserModule,
@@ -30,7 +34,8 @@ import {AppComponent} from './app.component';
     MatListModule,
     MatCardModule,
     MatTableModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
