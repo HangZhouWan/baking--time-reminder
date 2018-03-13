@@ -11,12 +11,13 @@ import construct = Reflect.construct;
 })
 export class AppComponent {
   rowData = [];
-  index = 1;
   reminderList = [];
+  index = 0;
 
-  @ViewChild('alertMessage')
+  @ViewChild('alertMessage') alertMessage: ElementRef;
 
-  alertMessage: ElementRef;
+  @ViewChild('tableWapper') tableWapper: ElementRef;
+
 
   ngOnInit(): void {
     this.setIntervalCheck();
@@ -41,9 +42,22 @@ export class AppComponent {
   }
 
   onNewDataButtonClick(): void {
+    this.index += 1;
     const newRow = this.constructRow();
     this.rowData.push(newRow);
-    this.index += 1;
+    setTimeout(function () {
+      this.tableWapper.nativeElement.scrollTop = this.tableWapper.nativeElement.scrollHeight;
+    }.bind(this), 1);
+  }
+
+
+  constructTimeCol(row, index): void {
+    const cols = ['proof', 'knead', 'split', 'shrink', 'bake', 'baked'];
+    const nowTime = new Date();
+    _.forEach(cols, (col) => {
+      this.constructCol(row, col, nowTime, index + 1);
+    });
+    row.start = true;
     this.setIndexByTime();
   }
 
@@ -51,13 +65,9 @@ export class AppComponent {
     const row = {
       index: this.index,
       waterRange: 0,
-      water: 0
+      water: 0,
+      start: false
     };
-    const cols = ['proof', 'knead', 'split', 'shrink', 'bake', 'baked'];
-    const nowTime = new Date();
-    _.forEach(cols, (col) => {
-      this.constructCol(row, col, nowTime, this.index);
-    });
     return row;
   }
 
@@ -143,6 +153,16 @@ export class AppComponent {
   reminderDone(row): void {
     row.alert = false;
     row.done = true;
+  }
+
+  isStartButtonDisabled(index): boolean {
+    if (index === 1) {
+      return false;
+    }
+    const pervRow = _.find(this.rowData, (row) => {
+      return row.index === (index - 1);
+    });
+    return pervRow && !pervRow.start;
   }
 }
 

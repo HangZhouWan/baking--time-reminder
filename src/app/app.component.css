@@ -1,5 +1,32 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
+
+@-webkit-keyframes shake{
+  0%{
+    opacity: 1;
+  }
+  50%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}@keyframes shake{
+   0%{
+     opacity: 1;
+   }
+   50%{
+     opacity: 0;
+   }
+   100%{
+     opacity: 1;
+   }
+ }
+.shake{
+  -webkit-animation: shake 1s infinite;
+  animation: shake 1s infinite;
+}
+
 .nav-bar {
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
 }
@@ -19,6 +46,11 @@
   background-color: white;
 }
 
+.reminder-title{
+  font-weight: bold;
+  font-size: 1rem;
+}
+
 .list-container{
   height: 95%;
   overflow: auto;
@@ -27,11 +59,13 @@
 .main {
   width: 80%;
   display: flex;
-  padding: 50px;
+  padding: 50px 50px 0 50px;
+  flex-direction: column;
+  min-height: 100%;
 }
 
 .mat-list {
-  padding-top: 30px;
+  padding-top: 0;
 }
 
 .mat-list .mat-list-item {
@@ -44,6 +78,7 @@ mat-card{
 }
 
 .mat-card-content.alert, td.alert{
+  font-weight: bold;
   color: #f44336;
 }
 td.done {
@@ -52,6 +87,7 @@ td.done {
 
 table {
   background-color: white;
+  margin-bottom: 0;
 }
 
 table th:not(colspan),table td:not(colspan) {
@@ -68,8 +104,30 @@ td input.time{
 }
 
 footer{
-  position: absolute;
-  bottom: 0;
-  text-align: center; width: 80%
+  text-align: center;
+  width: 100%;
+  align-self: flex-end;
+}
+.table-wapper{
+  overflow-y: auto;
+  max-height: 80%;
+}
+.table-wapper .table{
+  margin-top: -28px;
+}
+.table thead th{
+  border-bottom-width: 1px;
 }
 
+.table-header, .table-footer{
+  vertical-align: bottom;
+  padding: .75rem;
+  border-top: 1px solid #dee2e6;
+  text-align: center;
+  background-color: white;
+  font-weight: bold;
+}
+.table-container {
+  flex: 1;
+  max-height: 97%;
+}
