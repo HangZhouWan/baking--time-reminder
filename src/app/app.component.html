@@ -94,7 +94,7 @@
               </p>
             </mat-card-content>
             <mat-card-actions>
-              <button type="button" (click)="reminderDone(row)" class="btn btn-primary">完成</button>
+              <button *ngIf="row.alert" type="button" (click)="reminderDone(row)" class="btn btn-primary">完成</button>
             </mat-card-actions>
           </mat-card>
         </mat-list-item>

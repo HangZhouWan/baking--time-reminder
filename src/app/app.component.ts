@@ -135,7 +135,6 @@ export class AppComponent {
     const allDataArray = [];
     _.forEach(this.rowData, (row) => {
       _.forEach(row, (col) => {
-        console.log(col.reminder);
         if (_.isObject(col) && col.reminder !== '醒发') {
           allDataArray.push(col);
         }
