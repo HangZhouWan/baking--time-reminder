@@ -52,17 +52,17 @@
             <td *ngIf="row.start" [ngClass]="{'alert': row.knead.alert, 'done':row.knead.done ,'shake': row.knead.alert}">
               {{row.knead.displayTime}}
             </td>
-            <td *ngIf="row.start" [ngClass]="{'alert': row.split.alert, 'done':row.split.done, 'shake': row.knead.alert}">
+            <td *ngIf="row.start" [ngClass]="{'alert': row.split.alert, 'done':row.split.done, 'shake': row.split.alert}">
               {{row.split.displayTime}}
             </td>
             <td *ngIf="row.start"
-                [ngClass]="{'alert': row.shrink.alert, 'done':row.shrink.done, 'shake': row.knead.alert}">
+                [ngClass]="{'alert': row.shrink.alert, 'done':row.shrink.done, 'shake': row.shrink.alert}">
               {{row.shrink.displayTime}}
             </td>
-            <td *ngIf="row.start" [ngClass]="{'alert': row.bake.alert, 'done':row.bake.done, 'shake': row.knead.alert}">
+            <td *ngIf="row.start" [ngClass]="{'alert': row.bake.alert, 'done':row.bake.done, 'shake': row.bake.alert}">
               {{row.bake.displayTime}}
             </td>
-            <td *ngIf="row.start" [ngClass]="{'alert': row.baked.alert, 'done':row.baked.done ,'shake': row.knead.alert}">
+            <td *ngIf="row.start" [ngClass]="{'alert': row.baked.alert, 'done':row.baked.done ,'shake': row.baked.alert}">
               {{row.baked.displayTime}}
             </td>
             <td style="text-align: left" colspan="7" *ngIf="!row.start">
