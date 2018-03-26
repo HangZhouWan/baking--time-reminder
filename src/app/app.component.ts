@@ -164,5 +164,22 @@ export class AppComponent {
     });
     return pervRow && !pervRow.start;
   }
+
+  deleteRow(currentRow): void {
+    _.remove(this.rowData, currentRow);
+    _.remove(this.reminderList, function (reminder) {
+      return reminder.index === currentRow.index;
+    });
+    this.rowData.forEach(function (row) {
+      if (row.index > currentRow.index) {
+        row.index -= 1;
+      }
+    });
+    this.reminderList.forEach(function (reminder) {
+      if (reminder.index > currentRow.index) {
+        reminder.index -= 1;
+      }
+    });
+  }
 }
 

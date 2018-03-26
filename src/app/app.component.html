@@ -22,7 +22,7 @@
           <th scope="col">缩</th>
           <th scope="col">烤</th>
           <th scope="col">出</th>
-          <th></th>
+          <th scope="col">操作</th>
         </tr>
         </thead>
       </table>
@@ -65,7 +65,10 @@
             <td *ngIf="row.start" [ngClass]="{'alert': row.baked.alert, 'done':row.baked.done ,'shake': row.baked.alert}">
               {{row.baked.displayTime}}
             </td>
-            <td style="text-align: left" colspan="7" *ngIf="!row.start">
+            <td *ngIf="row.start">
+              <button class="btn btn-primary" (click)="deleteRow(row)">删除行</button>
+            </td>
+            <td style="text-align: left" colspan="8" *ngIf="!row.start">
               <button [disabled]="isStartButtonDisabled(i+1)" (click)="constructTimeCol(row, i)" class="btn btn-primary">开始计时</button>
             </td>
           </tr>
@@ -76,7 +79,7 @@
         <button (click)="onNewDataButtonClick()" type="button" class="btn btn-primary">添加数据</button>
       </div>
     </div>
-    <footer>CopyRight @Max Chang & @Sun Tong  V1.0.1</footer>
+    <footer>CopyRight @Max Chang & @Sun Tong  V1.1.1</footer>
   </div>
   <div class="side-reminder">
     <div class="reminder-title">待办事项</div>

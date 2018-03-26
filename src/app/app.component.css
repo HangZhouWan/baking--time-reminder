@@ -91,7 +91,7 @@ table {
 }
 
 table th:not(colspan),table td:not(colspan) {
-  width: 11%;
+  width: 10%;
   text-align: center;
 }
 
