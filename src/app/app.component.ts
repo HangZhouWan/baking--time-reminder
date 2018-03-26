@@ -10,6 +10,7 @@ import construct = Reflect.construct;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  filePath = './assets/alert/alert.mp3';
   rowData = [];
   reminderList = [];
   index = 0;
