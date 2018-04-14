@@ -43,7 +43,7 @@ export class AppComponent {
   }
 
   onNewDataButtonClick(): void {
-    this.index += 1;
+    this.index = this.rowData.length + 1;
     const newRow = this.constructRow();
     this.rowData.push(newRow);
     setTimeout(function () {
@@ -73,7 +73,7 @@ export class AppComponent {
   }
 
   calculateWaterValume(row, waterRange): void {
-    row.water = waterRange * 2 - 88;
+    row.water = (waterRange * 2 - 88).toFixed(1);
   }
 
   getFormatTime(time): string {

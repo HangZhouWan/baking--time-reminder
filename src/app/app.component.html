@@ -48,6 +48,9 @@
               <input class="range" [(ngModel)]='row.waterRange' (blur)="calculateWaterValume(row, row.waterRange)">
             </td>
             <td>{{row.water}}</td>
+            <td style="text-align: left" colspan="6" *ngIf="!row.start">
+              <button [disabled]="isStartButtonDisabled(i+1)" (click)="constructTimeCol(row, i)" class="btn btn-primary">开始计时</button>
+            </td>
             <td *ngIf="row.start">{{row.proof.displayTime}}</td>
             <td *ngIf="row.start" [ngClass]="{'alert': row.knead.alert, 'done':row.knead.done ,'shake': row.knead.alert}">
               {{row.knead.displayTime}}
@@ -65,11 +68,8 @@
             <td *ngIf="row.start" [ngClass]="{'alert': row.baked.alert, 'done':row.baked.done ,'shake': row.baked.alert}">
               {{row.baked.displayTime}}
             </td>
-            <td *ngIf="row.start">
-              <button class="btn btn-primary" (click)="deleteRow(row)">删除行</button>
-            </td>
-            <td style="text-align: left" colspan="8" *ngIf="!row.start">
-              <button [disabled]="isStartButtonDisabled(i+1)" (click)="constructTimeCol(row, i)" class="btn btn-primary">开始计时</button>
+            <td>
+              <button class="btn btn-primary" (click)="deleteRow(row)">删除</button>
             </td>
           </tr>
           </tbody>
